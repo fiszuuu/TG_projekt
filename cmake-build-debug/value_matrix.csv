@@ -1,0 +1,4 @@
+﻿macierz reprezentuje wartosci krawedzi z wierzcholka o numerze x (wiersze) do wierzchołka y (kolumny);;
+0;2;3
+4;0;3
+4;10;0
