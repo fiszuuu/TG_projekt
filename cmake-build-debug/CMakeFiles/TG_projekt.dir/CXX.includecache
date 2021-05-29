@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/JF/CLionProjects/TG_projekt/graf.h
+C:/Users/JF/repozytoria/TG_projekt/graf.h
 iostream
 -
 vector
@@ -22,17 +22,17 @@ cmath
 deque
 -
 
-C:/Users/JF/CLionProjects/TG_projekt/main.cpp
+C:/Users/JF/repozytoria/TG_projekt/main.cpp
 iostream
 -
 tests.h
-C:/Users/JF/CLionProjects/TG_projekt/tests.h
+C:/Users/JF/repozytoria/TG_projekt/tests.h
 
-C:/Users/JF/CLionProjects/TG_projekt/tests.h
+C:/Users/JF/repozytoria/TG_projekt/tests.h
 iostream
 -
 graf.h
-C:/Users/JF/CLionProjects/TG_projekt/graf.h
+C:/Users/JF/repozytoria/TG_projekt/graf.h
 cstdlib
 -
 

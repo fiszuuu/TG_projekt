@@ -23,7 +23,7 @@ class Edge{
 private:
     int start;
     int end;
-    int value;
+    int value{};
     bool is_directed;
 protected:
     void normalize();
@@ -45,14 +45,13 @@ void Edge::normalize() {
 class Graph{
 protected:
     static bool is_cycle(Edge x, Edge y, Edge z);
-    static bool potential_for_cycle(Edge x, Edge y);
 public:
-    bool add_edge(Edge e);
     int vertices;
     vector <Edge> edges;
     int * path;
     Graph();
     ~Graph();
+    bool add_edge(Edge e);
     void read_adjacency_list(ifstream & is);
     void read_value_matrix(ifstream & is);
     int ** incidence_matrix ();
@@ -177,12 +176,6 @@ void Graph::write_incidence_matrix(ostream &os) {
     }
 }
 
-bool Graph::potential_for_cycle(Edge x, Edge y) {
-    if (x.start == y.end || x.end == y.end || x.end == y.start || x.start == y.start)
-        return true;
-    return false;
-}
-
 bool Graph::is_cycle(Edge x, Edge y, Edge z) {
     if (x.end == y.start && y.end == z.end && z.start == x.start)
         return true;
@@ -241,10 +234,8 @@ vector <int> Graph::going_in_from(int vertex) {
 
 // -> given vertex
 int Graph::single_in(int vertex) {
-    int result;
     for (auto & edge: edges)
         if (edge.end == vertex){
-            //cout << edge.value <<endl;
             return edge.start;
         }
     return -1;
@@ -252,7 +243,6 @@ int Graph::single_in(int vertex) {
 
 //given vertex ->
 int Graph::single_out(int vertex) {
-    int result;
     for (auto & edge: edges)
         if (edge.start == vertex){
             //cout << edge.value << endl;
@@ -271,7 +261,6 @@ int Graph::find_edge_index(int start, int end) {
 
 
 //Ford Fulkerson
-
 bool Graph::find_path(int start, int end) {
     path = new int [vertices];
     for (int i = 0; i < vertices; ++i)
@@ -336,36 +325,3 @@ int Graph::FordFulkerson(int start, int end) {
     }
     return result;
 }
-
-/*
-int * Graph::find_path(int start, int end) {
-    //Path arr_of_vertices;
-    int *arr_of_vertices = new int [vertices];
-    *visited_vertices = new bool [vertices];
-    for (int i = 0; i < vertices; ++i){
-        visited_vertices[i] = false;
-    }
-    int *path;
-    int vertex = start, index = 1;
-    arr_of_vertices[start] = -1;
-    while (vertex != end){
-        if (single_out(vertex) != -1 && !visited_vertices[single_out(vertex)]){
-            arr_of_vertices[index] = vertex;
-            vertex = single_out(vertex);
-            visited_vertices[vertex] = true;
-            index++;
-            }
-        else {
-            vertex = single_in(vertex);
-        }
-    }
-    path = new int [index];
-    path[0] = end;
-    for (int i = 1; i < index; ++i){
-        path[i] = arr_of_vertices[path[i-1]];
-    }
-    //to do: get rid of this for by upgrading the previous one
-    for (int i = 0; i < index / 2; ++i)
-        swap(path[i], path[index - i - 1]);
-    return path;
-}*/

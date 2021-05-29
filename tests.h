@@ -102,20 +102,6 @@ void test_going_out_and_to (){
     cout << "done";
 }
 
-/*void test_path(){
-    Graph graph;
-    ifstream file ("value_matrix.txt");
-    if (!file){
-        cerr << "ERROR: Opening file didn't succeed";
-        return;
-    }
-    graph.read_value_matrix(file);
-    int *tab = graph.find_path(0, 3);
-    for (int i = 0; i < graph.vertices; ++i)
-        cout << tab[i] << "->";
-    cout << endl;
-};*/
-
 void test_path(){
     Graph graph;
     ifstream file ("value_matrix.txt");
@@ -189,7 +175,7 @@ void test_FordFulkerson(){
         return;
     }
     graph.read_value_matrix(file);
-    int end = 8;
-    cout<<"maksymalny przepływ przez ten graf z wierzchołka 0 do wierzchołka " << end << " wynosi: "<< graph.FordFulkerson(0, end);
+    int end = graph.vertices - 1;
+    cout<<"maksymalny przeplyw przez ten graf z wierzcholka 0 do wierzcholka " << end << " wynosi: "<< graph.FordFulkerson(0, end);
 }
 
