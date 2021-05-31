@@ -8,5 +8,5 @@ Macierz wartości jest moim autorskim pomysłem reprezentacji grafu skierowanego
 
 ## Obsługa programu
 Nie zmieniwszy nic po uruchomieniu programu, będzie on wyświetlał ścieżki oraz maksymalny przepływ dla grafu zmieszczonego powyżej. Aby podać inny graf należy:
-- zmienić zawartość pliku value_matrix_ford_3 lub
-- w pliku tests.h w funkcji Ford_printing_paths (linia 196) podać inny plik, na którym chcemy działać (PROGRAM OCZEKUJE MACIERZY WARTOŚCI)
+- zmienić zawartość pliku _value_matrix_ford_3_ lub
+- w pliku _tests.h_ w funkcji _Ford_printing_paths_ (linia 196) podać inny plik, na którym chcemy działać (PROGRAM OCZEKUJE MACIERZY WARTOŚCI)
