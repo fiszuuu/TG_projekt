@@ -4,7 +4,6 @@
 using namespace std;
 
 int main() {
-//    test_incidence_matrix();
-    test_FordFulkerson();
+    Ford_printing_paths();
     return 0;
 }

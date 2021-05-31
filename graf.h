@@ -23,7 +23,7 @@ class Edge{
 private:
     int start;
     int end;
-    int value{};
+    int value;
     bool is_directed;
 protected:
     void normalize();
@@ -45,13 +45,14 @@ void Edge::normalize() {
 class Graph{
 protected:
     static bool is_cycle(Edge x, Edge y, Edge z);
+    static bool potential_for_cycle(Edge x, Edge y);
 public:
+    bool add_edge(Edge e);
     int vertices;
     vector <Edge> edges;
     int * path;
     Graph();
     ~Graph();
-    bool add_edge(Edge e);
     void read_adjacency_list(ifstream & is);
     void read_value_matrix(ifstream & is);
     int ** incidence_matrix ();
@@ -65,6 +66,7 @@ public:
     bool DFS(int start, int end);
     bool find_path (int start, int end);
     int FordFulkerson (int start, int end );
+    int FordFulkerson_pathprinter (int start, int end);
 };
 
 //GRAPH METHODS
@@ -176,6 +178,12 @@ void Graph::write_incidence_matrix(ostream &os) {
     }
 }
 
+bool Graph::potential_for_cycle(Edge x, Edge y) {
+    if (x.start == y.end || x.end == y.end || x.end == y.start || x.start == y.start)
+        return true;
+    return false;
+}
+
 bool Graph::is_cycle(Edge x, Edge y, Edge z) {
     if (x.end == y.start && y.end == z.end && z.start == x.start)
         return true;
@@ -234,8 +242,10 @@ vector <int> Graph::going_in_from(int vertex) {
 
 // -> given vertex
 int Graph::single_in(int vertex) {
+    int result;
     for (auto & edge: edges)
         if (edge.end == vertex){
+            //cout << edge.value <<endl;
             return edge.start;
         }
     return -1;
@@ -243,6 +253,7 @@ int Graph::single_in(int vertex) {
 
 //given vertex ->
 int Graph::single_out(int vertex) {
+    int result;
     for (auto & edge: edges)
         if (edge.start == vertex){
             //cout << edge.value << endl;
@@ -261,6 +272,7 @@ int Graph::find_edge_index(int start, int end) {
 
 
 //Ford Fulkerson
+
 bool Graph::find_path(int start, int end) {
     path = new int [vertices];
     for (int i = 0; i < vertices; ++i)
@@ -303,7 +315,6 @@ int Graph::FordFulkerson(int start, int end) {
     int result = 0;
     while (find_path(start, end)){
         //needed to debug easier
-        vector<Edge> edge_path;
         deque<int> edges_indexes;
         int min_value = INT_MAX;
         for (int i = 0; path[i+1] != -1; ++i){
@@ -312,7 +323,6 @@ int Graph::FordFulkerson(int start, int end) {
             if (min_value > edges[index].value){
                 min_value = edges[index].value;
             }
-            edge_path.push_back(edges[index]);
             edges_indexes.push_back(index);
         }
         for (int i = 0; i < edges.size(); ++i){
@@ -321,6 +331,37 @@ int Graph::FordFulkerson(int start, int end) {
                 edges_indexes.pop_front();
             }
         }
+        result +=  min_value;
+    }
+    return result;
+}
+
+int Graph::FordFulkerson_pathprinter(int start, int end) {
+    int result = 0;
+    while (find_path(start, end)){
+        //needed to debug easier
+        cout << "sciezka po wierzcholkach: ";
+        for (int i = 0; path [i] != -1; ++i){
+            cout << path [i] << " ";
+        }
+        cout << endl;
+        deque<int> edges_indexes;
+        int min_value = INT_MAX;
+        for (int i = 0; path[i+1] != -1; ++i){
+            //cout << path[i]<< " ";
+            int index = find_edge_index(path[i], path[i+1]);
+            if (min_value > edges[index].value){
+                min_value = edges[index].value;
+            }
+            edges_indexes.push_back(index);
+        }
+        for (int i = 0; i < edges.size(); ++i){
+            if (i == edges_indexes[0]){
+                edges[i].value -= min_value;
+                edges_indexes.pop_front();
+            }
+        }
+        cout << "waskie gardlo: " << min_value << endl;
         result +=  min_value;
     }
     return result;
