@@ -10,3 +10,4 @@ Macierz wartości jest moim autorskim pomysłem reprezentacji grafu skierowanego
 Nie zmieniwszy nic po uruchomieniu programu, będzie on wyświetlał ścieżki oraz maksymalny przepływ dla grafu zmieszczonego powyżej. Aby podać inny graf należy:
 - zmienić zawartość pliku _value_matrix_ford_3_ lub
 - w pliku _tests.h_ w funkcji _Ford_printing_paths_ (linia 196) podać inny plik, na którym chcemy działać (PROGRAM OCZEKUJE MACIERZY WARTOŚCI)
+Na ten moment program nie radzi sobie z grafami, w których pajawiają się cykle, ale dla praktycznego użycia metody Forda-Fulkersona nie jest to problem
