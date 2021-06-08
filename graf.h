@@ -1,7 +1,7 @@
 #ifndef PROJEKT_TG_GRAF_H
 #define PROJEKT_TG_GRAF_H
 
-#endif //PROJEKT_TG_GRAF_H
+
 
 #include <iostream>
 #include <vector>
@@ -366,3 +366,5 @@ int Graph::FordFulkerson_pathprinter(int start, int end) {
     }
     return result;
 }
+
+#endif //PROJEKT_TG_GRAF_H

@@ -1,7 +1,7 @@
 #ifndef PROJEKT_TG_TESTS_H
 #define PROJEKT_TG_TESTS_H
 
-#endif //PROJEKT_TG_TESTS_H
+
 
 #include <iostream>
 #include "graf.h"
@@ -206,3 +206,4 @@ void Ford_printing_paths(){
     cout<<"maksymalny przeplyw przez ten graf z wierzcholka 0 do wierzcholka " << end << " wynosi: "<< result;
 }
 
+#endif //PROJEKT_TG_TESTS_H
